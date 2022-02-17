@@ -5,7 +5,7 @@ Implementation of incremental and progressive Magnitude-Shape plot for analyzing
 
 ## About
 
-- A Visual Analytics Approach for Hardware System Monitoring with Streaming Functional Data Analysis
+- A Hardware System Monitoring Approach with Streaming [Functional Data Analysis](https://fda.readthedocs.io/en/latest/auto_examples/index.html)
 - To perform FDA while addressing the computational problem, we introduce new incremental and progressive algorithms that promptly generate the magnitude-shape (MS) plot, which conveys both the functional magnitude and shape outlyingness of time series data. 
 - Features
     - A python implementation of magnitude-shape oulyingness measures for univariate time-series. 
