@@ -25,7 +25,7 @@ class ProgressiveFDA():
 
        ''' 
    
-    def __init__(self, inc_fdo = None, X = None):
+    def __init__(self, inc_fdo = None, X = None, threshold = 10):
 
         if inc_fdo == None:
             self.X = None
@@ -34,7 +34,7 @@ class ProgressiveFDA():
             self.VO = None
             self.FO = None
             self._l = None
-            self.threshold = 10
+            self.threshold = threshold
             self.Z = None
             self.mad = None
 
@@ -119,8 +119,9 @@ class ProgressiveFDA():
         x: array-like, shape(n_dimensions, 1)
             A new time series data that discretized
             with even intervals.
-        approximate: perform approximation check or not. By default we perform the approximation 
-        to check if the computed result is within the error threshold specified.
+        approximate: perform approximation check or not. If approximation check is true then
+        the results are approximated as long as they lie within the error 'threshold' specified during
+        initialization.
         Returns
         -------
         self
