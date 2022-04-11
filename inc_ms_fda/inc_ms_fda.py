@@ -137,18 +137,9 @@ class IncFDO():
         self.t = X.shape[1]
         Z = np.median(X, axis=0)
         X_Z = X - Z
-        # Median absolute deviation
+        
         mad = (np.median(np.abs(X_Z), axis=0) * 1.4826 ) + np.finfo(float).eps
-        print(mad.shape)
-        # stagel_donoho_outlyingness
-        E = np.abs(X_Z) / mad
-
-        # scikit-fda uses this one, but I think this is wrong
-        # l = la.norm(X_Z, axis=-1, keepdims=True) + np.finfo(float).eps
-        self._l = (la.norm(X_Z, axis=1) + np.finfo(float).eps)[..., np.newaxis]
-        V = X_Z / self._l
-
-        O = E * V
+        O = X_Z / mad
 
         self.MO = np.sum(O, axis=1) / self.t
         self.FO = np.sum(O * O, axis=1) / self.t
@@ -175,18 +166,14 @@ class IncFDO():
         mad = np.median(np.abs(x_z), axis=0) * 1.4826
 
         t_new = self.t + 1
-        l_new = (self._l**2 + x_z**2)**0.5
 
-        A = ((np.abs(x_z) / mad) * (x_z / l_new))[..., 0]
-        coeff1 = (self.t * self._l / l_new)
-        coeff2 = (coeff1 * self._l / l_new)[..., 0]
-        coeff1 = coeff1[..., 0]
+        A = (x_z / mad) [..., 0] 
+        coeff1 = self.t
 
         self.MO = (self.MO * coeff1 + A) / t_new
-        self.FO = (self.FO * coeff2 + A**2) / t_new
+        self.FO = (self.FO * coeff1 + A**2) / t_new
         self.VO = self.FO - self.MO * self.MO
         self.t = t_new
-        self._l = l_new
 
         return self
 
@@ -207,14 +194,10 @@ class IncFDO():
         x_z = (x - z)[..., np.newaxis]
         # Median absolute deviation
         mad = np.median(np.abs(x_z), axis=0) * 1.4826
-
         t_new = self.t - 1
-        l_new = (self._l**2 - x_z**2)**0.5
 
-        A = ((np.abs(x_z) / mad) * (x_z / l_new))[..., 0]
-        coeff1 = (self.t * self._l / l_new)
-        coeff2 = (coeff1 * self._l / l_new)[..., 0]
-        coeff1 = coeff1[..., 0]
+        A = (x_z / mad) [..., 0]
+        coeff1 = self.t
 
         self.MO = (self.MO * coeff1 - A) / t_new
         self.FO = (self.FO * coeff2 - A**2) / t_new
