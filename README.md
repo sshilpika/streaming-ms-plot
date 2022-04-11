@@ -11,6 +11,7 @@ Implementation of incremental and progressive Magnitude-Shape plot for analyzing
     - A python implementation of magnitude-shape oulyingness measures for univariate time-series. 
         - W. Dai and M. G. Genton, “Multivariate functional data visualization and outlier detection,” J. Comput. Graph. Stat., vol. 27, no. 4,pp. 923–934, 2018.
     - This implementation **incrementally** updates new incoming time points and **progressively** updates (with or without approximation) the new time-series (i.e., functions) for fast streaming input data.
+    - For FPCA refer [here](https://cran.r-project.org/web/packages/fdapace/vignettes/fdapaceVig.html).
     
     
 ## Requirements
