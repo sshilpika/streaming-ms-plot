@@ -1,3 +1,6 @@
+
+[Demo Video](https://youtu.be/DrdrvsZLmA8)
+
 # Time-Series Analysis with Streaming Functional Data Analysis (FDA) using Incremental and Progressive Magnitude-Shape Plot
 
 Implementation of incremental and progressive Magnitude-Shape plot for analyzing streaming time-series data
